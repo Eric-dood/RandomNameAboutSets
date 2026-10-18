@@ -96,7 +96,7 @@ int main_menu()
 }
 
 //Define select_goat()
-int select_goat(list<Goat> trip, bool big = false)
+int select_goat(set<Goat> trip, bool big = false)
 {
     //Temporary variable
     int temp;
@@ -127,7 +127,7 @@ int select_goat(list<Goat> trip, bool big = false)
 }
 
 //Define add_goat()
-void add_goat(list<Goat> &trip, string name[], string col[])
+void add_goat(set<Goat> &trip, string name[], string col[])
 {
     //Define a randomized goat age
     int goatAge = rand() % MAX_AGE + 1;
@@ -135,7 +135,7 @@ void add_goat(list<Goat> &trip, string name[], string col[])
     Goat temp = Goat(name[rand() % SZ_NAMES], goatAge, col[rand() % SZ_COLORS]);
     //If the list is smaller than 1, do a instant insert
     if (trip.size() < 1)
-        trip.push_back(temp);
+        trip.insert(temp);
     //Otherwise ask the user to select a number to insert the new goat after
     else
     {
@@ -150,14 +150,17 @@ void add_goat(list<Goat> &trip, string name[], string col[])
     }
 }
 
-void delete_goat(list<Goat> &trip)
+void delete_goat(set<Goat> &trip)
 {
     //Check if the list isn't empty
     if (!trip.empty())
     {
         //If the list is smaller than 1, do a instant insert
         if (trip.size() <= 1)
-            trip.pop_back();
+        {
+            auto it = trip.begin();
+            trip.erase(it);
+        }
         //Otherwise ask the user to select a number to delete an existing goat
         else
         {
@@ -177,7 +180,7 @@ void delete_goat(list<Goat> &trip)
 }
 
 //Define display_trip()
-void display_trip(list<Goat> trip)
+void display_trip(set<Goat> trip)
 {
     //This integer is gonna be used for looping
     int count = 1;
