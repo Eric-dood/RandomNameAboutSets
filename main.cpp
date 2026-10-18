@@ -133,23 +133,31 @@ void add_goat(set<Goat> &trip, string name[], string col[])
     int goatAge = rand() % MAX_AGE + 1;
     //Define temp, which uses a Goat constructor
     Goat temp(name[rand() % SZ_NAMES], goatAge, col[rand() % SZ_COLORS]);
-    //If the list is smaller than 1, do a instant insert
-    if (trip.size() < 1)
-        trip.insert(temp);
-    //Otherwise ask the user to select a number to insert the new goat after
+    //If the list no longer has any more unique elements
+    if (trip.size() > trip.max_size()) {
+        cout << "Maximum unique elements reached." << endl;
+    }
     else
     {
-        //Prompt the user to select a goat
-        cout << "Select a number to insert the goat after a certain element";
-        int sel = select_goat(trip, true) + 1;
-        //Search through the list to find the specified value
-        auto it = trip.begin();
-        advance(it, sel);
-        //Insert the value
-        trip.insert(it, temp);
+        //If the list is smaller than 1, do a instant insert
+        if (trip.size() < 1)
+            trip.insert(temp);
+        //Otherwise ask the user to select a number to insert the new goat after
+        else
+        {
+            //Prompt the user to select a goat
+            cout << "Select a number to insert the goat after a certain element";
+            int sel = select_goat(trip, true) + 1;
+            //Search through the list to find the specified value
+            auto it = trip.begin();
+            advance(it, sel);
+            //Insert the value
+            trip.insert(it, temp);
+        }
     }
 }
 
+//Define delete_goat()
 void delete_goat(set<Goat> &trip)
 {
     //Check if the list isn't empty
