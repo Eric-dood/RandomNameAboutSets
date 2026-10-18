@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <list>
+#include <set>
 #include "Goat.h"
 using namespace std;
 
@@ -10,10 +10,10 @@ using namespace std;
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
 //Prototype functions
-int select_goat(list<Goat> trip, bool);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip, bool);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string [], string []);
+void display_trip(set<Goat> trip);
 int main_menu();
 
 //Start of main()
@@ -22,7 +22,7 @@ int main() {
     srand(time(0));
 
     //Create a list of Goats
-    list<Goat> goatList;
+    set<Goat> goatSet;
 
     //Read & populate arrays for names and colors
     //Define fin & read the names file
@@ -53,13 +53,13 @@ int main() {
         switch (choice)
         {
             case 1: //Adds a goat
-                add_goat(goatList, names, colors);
+                add_goat(goatSet, names, colors);
                 break;
             case 2: //Removed a goat
-                delete_goat(goatList);
+                delete_goat(goatSet);
                 break;
             case 3: //Displays the goat list
-                display_trip(goatList);
+                display_trip(goatSet);
                 break;
             case 4: //Quits the application
                 cout << "Quitting... Thanks for trying!" << endl;
