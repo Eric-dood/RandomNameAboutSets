@@ -132,7 +132,7 @@ void add_goat(set<Goat> &trip, string name[], string col[])
     //Define a randomized goat age
     int goatAge = rand() % MAX_AGE + 1;
     //Define temp, which uses a Goat constructor
-    Goat temp = Goat(name[rand() % SZ_NAMES], goatAge, col[rand() % SZ_COLORS]);
+    Goat temp(name[rand() % SZ_NAMES], goatAge, col[rand() % SZ_COLORS]);
     //If the list is smaller than 1, do a instant insert
     if (trip.size() < 1)
         trip.insert(temp);
@@ -186,7 +186,7 @@ void display_trip(set<Goat> trip)
     int count = 1;
     //Check if the list is empty: if it is, print a message
     if (trip.empty())
-        cout << "List is empty." << endl;
+        cout << "Set is empty." << endl;
     //Otherwise go through the entire list to print all elements
     else
     {
